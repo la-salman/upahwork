@@ -55,7 +55,7 @@ export default function Hero() {
           </p>
 
           {/* Email Input and Button */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-2 max-w-xl mx-auto bg-white/90 rounded-xl sm:rounded-full p-1 shadow-lg ring-1 ring-white/20">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-2 max-w-xl mx-auto bg-white/90 rounded-xl sm:rounded-full p-1 shadow-lg ring-1 ring-white/20 focus-within:ring-2 focus-within:ring-[#FDCA0C] hover:ring-2 hover:ring-[#FDCA0C] transition">
             <input
               type="email"
               placeholder="Email Address"
