@@ -62,7 +62,6 @@ export default function Footer() {
                             </svg>
                         </Link>
 
-                        {/* LinkedIn */}
                         {/* <Link
                             href="#"
                             aria-label="LinkedIn"
