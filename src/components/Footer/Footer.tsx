@@ -17,7 +17,9 @@ export default function Footer() {
                     <div className="flex items-center gap-3 sm:gap-4">
                         {/* Instagram */}
                         <Link
-                            href="instagram.com/upahwork"
+                            href="https://www.instagram.com/upahwork"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             aria-label="Instagram"
                             className="rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:ring-offset-2"
                         >
@@ -31,6 +33,8 @@ export default function Footer() {
                         {/* Facebook */}
                         <Link
                             href="https://www.facebook.com/profile.php?id=61582298315896&mibextid=wwXIfr&mibextid=wwXIfr"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             aria-label="Facebook"
                             className=" rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:ring-offset-2"
                         >
@@ -41,7 +45,9 @@ export default function Footer() {
 
                         {/* X (Twitter) */}
                         <Link
-                            href="x.com/upahwork"
+                            href="https://x.com/upahwork"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             aria-label="X"
                             className="rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:ring-offset-2"
                         >
@@ -54,6 +60,8 @@ export default function Footer() {
                         {/* TikTok */}
                         <Link
                             href="https://www.tiktok.com/@upahwork?_t=ZS-90s1kmNAwCO&_r=1"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             aria-label="TikTok"
                             className="rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:ring-offset-2"
                         >
