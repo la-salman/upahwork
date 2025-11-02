@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <section className="relative py-12 sm:py-16 lg:py-20">
+    <section id="about" className="relative py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left: Text */}

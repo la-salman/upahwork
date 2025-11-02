@@ -24,13 +24,13 @@ export default function Header() {
         <div className="flex items-center gap-4 md:gap-8">
           <nav className="hidden md:flex items-center gap-8">
             <Link
-              href="/about"
+              href="#about"
               className="text-white hover:text-[#FDCA0C] transition-colors duration-200 font-normal leading-8 text-base"
             >
               About Us
             </Link>
             <Link
-              href="/how-it-works"
+              href="#how-it-works"
               className="text-white hover:text-[#FDCA0C] transition-colors duration-200 font-normal leading-8 text-base"
             >
               How it Works
@@ -38,7 +38,7 @@ export default function Header() {
           </nav>
           {/* CTA Button */}
           <Link
-            href="/join-provider"
+            href="#join-provider"
             className="hidden md:inline-flex bg-[#FDCA0C] text-black text-base px-6 py-2.5 rounded-full font-medium hover:bg-yellow-400 transition-colors duration-200 whitespace-nowrap shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FDCA0C] focus:ring-offset-transparent"
           >
             Join as Service Provider
@@ -69,21 +69,21 @@ export default function Header() {
           <div className="md:hidden absolute left-0 right-0 top-full mt-2 px-4">
             <div className="rounded-xl bg-black/80 backdrop-blur supports-backdrop-filter:bg-black/60 border border-white/10 p-4 space-y-2">
               <Link
-                href="/about"
+                href="#about"
                 className="block text-white hover:text-[#FDCA0C] transition-colors duration-200 font-normal leading-8 text-base"
                 onClick={() => setIsOpen(false)}
               >
                 About Us
               </Link>
               <Link
-                href="/how-it-works"
+                href="#how-it-works"
                 className="block text-white hover:text-[#FDCA0C] transition-colors duration-200 font-normal leading-8 text-base"
                 onClick={() => setIsOpen(false)}
               >
                 How it Works
               </Link>
               <Link
-                href="/join-provider"
+                href="#join-provider"
                 className="block w-full text-center bg-[#FDCA0C] text-black text-base px-6 py-3 rounded-full font-medium hover:bg-yellow-400 transition-colors duration-200"
                 onClick={() => setIsOpen(false)}
               >
