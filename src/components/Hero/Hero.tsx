@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/ui/header";
+import Link from "next/link";
 
 export default function Hero() {
 
@@ -27,7 +28,7 @@ export default function Hero() {
           <source src="/vedio.mov" type="video/quicktime" />
           <source src="/vedio.mov" type="video/mp4" />
         </video>
-        
+
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/60 pointer-events-none" />
       </div>
@@ -37,37 +38,33 @@ export default function Hero() {
 
       {/* Hero Content - Centered */}
       <div className="relative z-10 min-h-screen flex items-center justify-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Main Title */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-normal text-white leading-16 mb-1">
-            Trusted Home Services
-          </h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+            {/* Main Title */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-normal text-white leading-16 mb-1">
+              Trusted Home Services
+            </h1>
 
-          {/* Subtitle */}
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-normal text-[#FDCA0C] leading-16 mb-6 sm:mb-8">
-            Anytime, Anywhere
-          </h2>
+            {/* Subtitle */}
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-normal text-[#FDCA0C] leading-16 mb-6 sm:mb-8">
+              Anytime, Anywhere
+            </h2>
 
-          {/* Descriptive Text */}
-          <p className="text-white text-lg  md:text-xl font-normal mb-10 px-4 max-w-2xl mx-auto leading-7">
-            From cleaning to AC repair, find verified professionals in minutes
-            insured, reliable, and fairly paid.
-          </p>
+            {/* Descriptive Text */}
+            <p className="text-white text-lg md:text-xl font-normal mb-10 px-4 max-w-2xl mx-auto leading-7">
+              From cleaning to AC repair, find verified professionals in minutes
+              insured, reliable, and fairly paid.
+            </p>
 
-          {/* Email Input and Button */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-2 max-w-xl mx-auto bg-white/90 rounded-xl sm:rounded-full p-1 shadow-lg ring-1 ring-white/20 focus-within:ring-2 focus-within:ring-[#FDCA0C] hover:ring-2 hover:ring-[#FDCA0C] transition">
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full flex-1 px-4 py-4 rounded-md sm:rounded-full text-gray-900 placeholder-gray-500 transition-all font-normal outline-none border-0 focus:ring-0"
-              aria-label="Email Address"
-            />
-            <button
-              type="button"
-              className="text-base w-full sm:w-auto bg-[#FDCA0C] text-black px-6 py-3 rounded-md sm:rounded-full font-medium hover:bg-yellow-400 transition-colors duration-200 whitespace-nowrap sm:ml-1 mr-1"
-            >
-              Join Waitlist
-            </button>
+            {/* CTA Button */}
+            <div className="w-full sm:w-auto flex justify-center">
+              <Link
+                href="#join-provider"
+                className="inline-flex items-center justify-center bg-[#FDCA0C] text-black text-base px-7 py-3 rounded-full font-medium hover:bg-yellow-400 transition-colors duration-200 w-full sm:w-auto max-w-xs sm:max-w-none"
+              >
+                Join as Service Provider
+              </Link>
+            </div>
           </div>
         </div>
       </div>
