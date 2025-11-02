@@ -18,6 +18,30 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Google Sheets Integration Setup
+
+The "Join as a Service Provider" form is connected to Google Sheets. To set this up:
+
+1. **Create a Google Sheet** (or use an existing one)
+   - The sheet will automatically have headers created: Company Name, Services, Email, Phone, Location, Timestamp
+
+2. **Get your Google Sheet ID**
+   - Open your Google Sheet
+   - Look at the URL: `https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit`
+   - Copy the `YOUR_SHEET_ID_HERE` part
+
+3. **Set the Environment Variable**
+   - Create a `.env.local` file in the root directory (if it doesn't exist)
+   - Add: `GOOGLE_SHEET_ID=your_google_sheet_id_here`
+   - Replace `your_google_sheet_id_here` with your actual Sheet ID
+
+4. **Share the Google Sheet with the Service Account**
+   - The service account email is: `spreadsheet@upahwork-company-users.iam.gserviceaccount.com`
+   - In your Google Sheet, click "Share" and add this email with "Editor" permissions
+   - This allows the service account to write data to your sheet
+
+5. **Restart your development server** after setting the environment variable
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More

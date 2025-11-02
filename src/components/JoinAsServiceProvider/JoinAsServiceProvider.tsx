@@ -11,10 +11,16 @@ const servicesList = [
   "Others",
 ];
 
+type FormType = "company" | "individual";
+
 export default function JoinAsServiceProvider() {
+  const [formType, setFormType] = useState<FormType>("individual");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -40,15 +46,86 @@ export default function JoinAsServiceProvider() {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // Reset form when switching between tabs
+  useEffect(() => {
+    setSelectedServices([]);
+    setIsDropdownOpen(false);
+    setSubmitMessage(null);
+    formRef.current?.reset();
+  }, [formType]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
     if (selectedServices.length === 0) {
-      alert("Please select at least one service");
+      setSubmitMessage({ type: "error", text: "Please select at least one service" });
       setIsDropdownOpen(true);
       return;
     }
-    // Handle form submission here
-    console.log("Form submitted", { selectedServices });
+
+    setIsSubmitting(true);
+    setSubmitMessage(null);
+
+    // Get form data
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const location = formData.get("location") as string;
+
+    // Prepare request body based on form type
+    let requestBody: any = {
+      formType,
+      services: selectedServices,
+      email,
+      phone,
+      location,
+    };
+
+    if (formType === "company") {
+      const companyName = formData.get("companyName") as string;
+      requestBody.companyName = companyName;
+    } else {
+      const fullName = formData.get("fullName") as string;
+      requestBody.fullName = fullName;
+    }
+
+    try {
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Use detailed error message from API if available
+        const errorMsg = data.message || data.error || "Failed to submit form";
+        throw new Error(errorMsg);
+      }
+
+      // Success
+      setSubmitMessage({ type: "success", text: "Thank you! Your information has been submitted successfully. We'll reach out to you soon." });
+      
+      // Reset form
+      formRef.current?.reset();
+      setSelectedServices([]);
+      
+      // Clear message after 5 seconds
+      setTimeout(() => {
+        setSubmitMessage(null);
+      }, 5000);
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      setSubmitMessage({
+        type: "error",
+        text: error.message || "Something went wrong. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -65,17 +142,73 @@ export default function JoinAsServiceProvider() {
             </p>
           </div>
 
+          {/* Tab Selector */}
+          <div className="flex gap-2 mb-6">
+            <button
+              type="button"
+              onClick={() => setFormType("company")}
+              disabled={isSubmitting}
+              className={`flex-1 py-3 px-4 rounded-lg border text-base font-medium transition-colors duration-200 ${
+                formType === "company"
+                  ? "bg-[#FDCA0C] text-[#111827] border-transparent"
+                  : "bg-white text-[#111827] border-gray-300 hover:bg-gray-50"
+              } disabled:opacity-50 disabled:cursor-not-allowed`}
+            >
+              Company
+            </button>
+            <button
+              type="button"
+              onClick={() => setFormType("individual")}
+              disabled={isSubmitting}
+              className={`flex-1 py-3 px-4 rounded-lg border text-base font-medium transition-colors duration-200 ${
+                formType === "individual"
+                  ? "bg-[#FDCA0C] text-[#111827] border-transparent"
+                  : "bg-white text-[#111827] border-gray-300 hover:bg-gray-50"
+              } disabled:opacity-50 disabled:cursor-not-allowed`}
+            >
+              Individual
+            </button>
+          </div>
+
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Company Name */}
-            <div>
-              <input
-                type="text"
-                placeholder="Enter Company Name"
-                required
-                className="w-full py-3 px-4 rounded-lg border border-gray-300 text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent"
-              />
-            </div>
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            {/* Success/Error Message */}
+            {submitMessage && (
+              <div
+                className={`p-4 rounded-lg ${
+                  submitMessage.type === "success"
+                    ? "bg-green-50 text-green-800 border border-green-200"
+                    : "bg-red-50 text-red-800 border border-red-200"
+                }`}
+              >
+                <p className="text-sm font-medium">{submitMessage.text}</p>
+              </div>
+            )}
+
+            {/* Company Name (for Company form) or Full Name (for Individual form) */}
+            {formType === "company" ? (
+              <div>
+                <input
+                  type="text"
+                  name="companyName"
+                  placeholder="Enter Company Name"
+                  required
+                  disabled={isSubmitting}
+                  className="w-full py-3 px-4 rounded-lg border border-gray-300 text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+              </div>
+            ) : (
+              <div>
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Full Name"
+                  required
+                  disabled={isSubmitting}
+                  className="w-full py-3 px-4 rounded-lg border border-gray-300 text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+              </div>
+            )}
 
             {/* Services you offer */}
             <div className="space-y-2" ref={dropdownRef}>
@@ -83,9 +216,10 @@ export default function JoinAsServiceProvider() {
                 <button
                   type="button"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  disabled={isSubmitting}
                   className={`w-full min-h-[48px] py-3 px-4 rounded-lg border border-gray-300 text-left focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent pr-10 flex items-center ${
                     selectedServices.length === 0 ? "text-gray-400" : "text-[#111827]"
-                  }`}
+                  } disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   {selectedServices.length === 0 ? (
                     <span>Services you offer</span>
@@ -164,9 +298,11 @@ export default function JoinAsServiceProvider() {
             <div>
               <input
                 type="email"
+                name="email"
                 placeholder="Email"
                 required
-                className="w-full py-3 px-4 rounded-lg border border-gray-300 text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent"
+                disabled={isSubmitting}
+                className="w-full py-3 px-4 rounded-lg border border-gray-300 text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
 
@@ -174,9 +310,11 @@ export default function JoinAsServiceProvider() {
             <div>
               <input
                 type="tel"
+                name="phone"
                 placeholder="Phone Number"
                 required
-                className="w-full py-3 px-4 rounded-lg border border-gray-300 text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent"
+                disabled={isSubmitting}
+                className="w-full py-3 px-4 rounded-lg border border-gray-300 text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
 
@@ -184,18 +322,21 @@ export default function JoinAsServiceProvider() {
             <div>
               <input
                 type="text"
+                name="location"
                 placeholder="Where are you located"
                 required
-                className="w-full py-3 px-4 rounded-lg border border-gray-300 text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent"
+                disabled={isSubmitting}
+                className="w-full py-3 px-4 rounded-lg border border-gray-300 text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full py-3 px-4 rounded-lg bg-[#FDCA0C] text-black text-base font-medium text-center hover:bg-yellow-400 transition-colors duration-200"
+              disabled={isSubmitting}
+              className="w-full py-3 px-4 rounded-lg bg-[#FDCA0C] text-black text-base font-medium text-center hover:bg-yellow-400 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Join now
+              {isSubmitting ? "Submitting..." : "Join now"}
             </button>
           </form>
         </div>

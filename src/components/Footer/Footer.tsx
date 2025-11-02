@@ -17,7 +17,7 @@ export default function Footer() {
                     <div className="flex items-center gap-3 sm:gap-4">
                         {/* Instagram */}
                         <Link
-                            href="#"
+                            href="instagram.com/upahwork"
                             aria-label="Instagram"
                             className="rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:ring-offset-2"
                         >
@@ -30,7 +30,7 @@ export default function Footer() {
 
                         {/* Facebook */}
                         <Link
-                            href="#"
+                            href="https://www.facebook.com/profile.php?id=61582298315896&mibextid=wwXIfr&mibextid=wwXIfr"
                             aria-label="Facebook"
                             className=" rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:ring-offset-2"
                         >
@@ -41,7 +41,7 @@ export default function Footer() {
 
                         {/* X (Twitter) */}
                         <Link
-                            href="#"
+                            href="x.com/upahwork"
                             aria-label="X"
                             className="rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:ring-offset-2"
                         >
@@ -53,7 +53,7 @@ export default function Footer() {
 
                         {/* TikTok */}
                         <Link
-                            href="#"
+                            href="https://www.tiktok.com/@upahwork?_t=ZS-90s1kmNAwCO&_r=1"
                             aria-label="TikTok"
                             className="rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:ring-offset-2"
                         >
@@ -63,13 +63,13 @@ export default function Footer() {
                         </Link>
 
                         {/* LinkedIn */}
-                        <Link
+                        {/* <Link
                             href="#"
                             aria-label="LinkedIn"
                             className=" rounded-fullflex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FDCA0C] focus:ring-offset-2 flex rounded-full"
                         >
                             <Image src="/linkdin.svg" alt="LinkedIn" width={27} height={27} />
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
             </div>
