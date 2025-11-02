@@ -52,7 +52,7 @@ export default function JoinAsServiceProvider() {
   };
 
   return (
-    <section id="join-provider" className="relative py-12 sm:py-16 lg:py-20 bg-white"> 
+    <section id="join-provider" className="relative py-12 sm:py-16 lg:py-20 bg-[#F9FAFB]"> 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           {/* Heading and Description */}

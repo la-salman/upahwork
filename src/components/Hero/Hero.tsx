@@ -41,17 +41,17 @@ export default function Hero() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
             {/* Main Title */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-normal text-white leading-16 mb-1">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-normal text-white sm:leading-16 mb-1 ">
               Trusted Home Services
             </h1>
 
             {/* Subtitle */}
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-normal text-[#FDCA0C] leading-16 mb-6 sm:mb-8">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-normal text-[#FDCA0C] sm:leading-16 mb-5 sm:mb-8">
               Anytime, Anywhere
             </h2>
 
             {/* Descriptive Text */}
-            <p className="text-white text-lg md:text-xl font-normal mb-10 px-4 max-w-2xl mx-auto leading-7">
+            <p className="text-white text-base md:text-xl font-normal mb-10 px-4 max-w-2xl mx-auto leading-8">
               From cleaning to AC repair, find verified professionals in minutes
               insured, reliable, and fairly paid.
             </p>
