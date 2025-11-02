@@ -336,7 +336,7 @@ export default function JoinAsServiceProvider() {
               disabled={isSubmitting}
               className="w-full py-3 px-4 rounded-lg bg-[#FDCA0C] text-black text-base font-medium text-center hover:bg-yellow-400 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? "Submitting..." : "Join now"}
+              {isSubmitting ? "loading..." : "Join now"}
             </button>
           </form>
         </div>
